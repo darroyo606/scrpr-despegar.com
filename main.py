@@ -1,6 +1,12 @@
 from selenium import webdriver
 #from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from mongobd import MongoConnection
+
+
+db_client = MongoConnection().client
+db = db_client.get_database('despegar')
+col = db.get_collection('flights')
 
 driver = webdriver.Firefox()
 driver.get("https://www.us.despegar.com/flights/UIO/AGP?from=SB&di=1-0&reSearch=true")
@@ -14,6 +20,15 @@ for f in flights:
     arrival = f.find_element(by=By.CLASS_NAME, value="cluster-part-1").text
     day = f.find_element(by=By.CLASS_NAME, value="quantity-days").text
     price = f.find_element(by=By.CLASS_NAME, value="price").text
+    document = {
+        "airline": airline_name,
+        "depature": departure,
+        "arrival": arrival,
+        "days": day,
+        "price": price
+    }
+
+    col.insert_one(document=document)
 
     print(airline_name)
     print(departure)
