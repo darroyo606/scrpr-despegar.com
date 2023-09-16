@@ -4,6 +4,7 @@ Paso 1
 Crear el .env
 
 MONGO_USER=tu usuario
+
 MONGO_PASSWORD=tu contraseña
 
 Paso 2
