@@ -20,7 +20,7 @@ for f in flights:
     print(arrival)
     print(day)
     print(price)
-
+    print('='*40)
 #elem.clear()
 #elem.send_keys("pycon")
 #elem.send_keys(Keys.RETURN)
